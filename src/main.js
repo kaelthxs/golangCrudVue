@@ -1,4 +1,8 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';  // Импортируем маршрутизатор
 
-createApp(App).mount('#app')
+// Создаем приложение, подключаем маршрутизатор и монтируем его
+createApp(App)
+    .use(router)  // Подключаем маршрутизатор
+    .mount('#app');
