@@ -11,6 +11,17 @@ type ClientService struct {
 	db *sqlx.DB
 }
 
+// @Summary Showall Tulupou.Client
+// @Security ApiKeyAuth
+// @Tags clients
+// @ID show-clients
+// @Accept json
+// @Produce json
+// @Success 200 {integer} integer 1
+// @Failure 400,404 {object} error
+// @Failure 500 {object} error
+// @Failure default {object} error
+// @Router /api/client/ [get]
 func (r *Handler) getAllClient(c *gin.Context) {
 	log.Println("getAllClient called")
 
@@ -42,6 +53,17 @@ func (r *Handler) getAllClient(c *gin.Context) {
 	c.JSON(200, clients)
 }
 
+// @Summary Showone Tulupou.Client
+// @Security ApiKeyAuth
+// @Tags client
+// @ID show-client
+// @Accept json
+// @Produce json
+// @Success 200 {integer} integer 1
+// @Failure 400,404 {object} error
+// @Failure 500 {object} error
+// @Failure default {object} error
+// @Router /api/client/:id [get]
 func (h *Handler) getClientById(c *gin.Context) {
 	// Получаем ID из параметров запроса
 	id := c.Param("id")
@@ -60,6 +82,18 @@ func (h *Handler) getClientById(c *gin.Context) {
 	c.JSON(200, client)
 }
 
+// @Summary Updateone Tulupou.Client
+// @Security ApiKeyAuth
+// @Tags Updateclient
+// @ID Update-clients
+// @Accept json
+// @Produce json
+// @Param input body Tulupou.Client true "account info"
+// @Success 200 {integer} integer 1
+// @Failure 400,404 {object} error
+// @Failure 500 {object} error
+// @Failure default {object} error
+// @Router /api/client/:id [put]
 func (h *Handler) updateClient(c *gin.Context) {
 	id := c.Param("id") // Получаем ID клиента из параметров
 
@@ -86,6 +120,18 @@ func (h *Handler) updateClient(c *gin.Context) {
 	c.JSON(200, gin.H{"message": "Client updated successfully"})
 }
 
+// @Summary Deleteone Tulupou.Client
+// @Security ApiKeyAuth
+// @Tags Deleteclient
+// @ID Delete-clients
+// @Accept json
+// @Produce json
+// @Param input body integer true "account info"
+// @Success 200 {integer} integer 1
+// @Failure 400,404 {object} error
+// @Failure 500 {object} error
+// @Failure default {object} error
+// @Router /api/client/:id [delete]
 func (h *Handler) deleteClient(c *gin.Context) {
 	id := c.Param("id") // Получаем ID клиента из параметров
 

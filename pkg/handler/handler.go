@@ -3,7 +3,12 @@ package handler
 import (
 	"Tulupou/pkg/service"
 	"github.com/gin-gonic/gin"
+
 	"github.com/jmoiron/sqlx"
+	"github.com/swaggo/files"
+	"github.com/swaggo/gin-swagger"
+
+	_ "Tulupou/docs"
 )
 
 type Handler struct {
@@ -20,6 +25,8 @@ func NewHandler(services *service.Service, db *sqlx.DB) *Handler {
 
 func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
+
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	auth := router.Group("/auth")
 	{
@@ -46,5 +53,6 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			book.DELETE("/:id", h.deleteBook)
 		}
 	}
+
 	return router
 }
